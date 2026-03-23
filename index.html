@@ -483,17 +483,17 @@ footer{background:var(--dark);color:rgba(255,255,255,.5);padding:48px 40px 24px;
 <!-- ARTICLE OVERLAY -->
 <div class="art-overlay" id="artOverlay" onclick="if(event.target===this)closeArt()">
   <div class="art-inner">
-    <div class="art-img" id="artImg"></div>
+    <div class="art-img" id="rovImg"></div>
     <div class="art-body">
       <button class="art-back" onclick="closeArt()">
         <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="15 18 9 12 15 6"/></svg>
         Retour
       </button>
-      <span class="art-cat" id="artCat"></span>
-      <h2 id="artTitle"></h2>
-      <div class="art-meta"><span id="artAuth"></span><div class="dot"></div><span id="artDate"></span></div>
-      <div class="art-excerpt" id="artExcerpt"></div>
-      <div id="artContent"></div>
+      <span class="art-cat" id="rovCat"></span>
+      <h2 id="rovTitle"></h2>
+      <div class="art-meta"><span id="rovAuth"></span><div class="dot"></div><span id="rovDate"></span></div>
+      <div class="art-excerpt" id="rovExcerpt"></div>
+      <div id="rovContent"></div>
     </div>
   </div>
 </div>
@@ -689,15 +689,15 @@ function card(a){
 function openArt(id){
   const a=articles.find(x=>x.id===id);
   if(!a){ showToast('Article introuvable'); return; }
-  const imgEl=document.getElementById('artImg');
+  const imgEl=document.getElementById('rovImg');
   if(a.image){imgEl.innerHTML=`<img src="${a.image}" alt="">`;imgEl.style.background='none';}
   else{imgEl.innerHTML=`<span style="font-size:64px;">${CATS[a.category]?.emoji||'📰'}</span>`;imgEl.style.background='var(--grad)';}
-  document.getElementById('artCat').textContent=a.category==='Interviews'?'🎙️ Interview':a.category;
-  document.getElementById('artTitle').textContent=a.title;
-  document.getElementById('artAuth').textContent=a.author;
-  document.getElementById('artDate').textContent=new Date(a.date).toLocaleDateString('fr-FR',{weekday:'long',day:'numeric',month:'long',year:'numeric'});
-  document.getElementById('artExcerpt').textContent=a.excerpt;
-  const contentEl=document.getElementById('artContent');
+  document.getElementById('rovCat').textContent=a.category==='Interviews'?'🎙️ Interview':a.category;
+  document.getElementById('rovTitle').textContent=a.title;
+  document.getElementById('rovAuth').textContent=a.author;
+  document.getElementById('rovDate').textContent=new Date(a.date).toLocaleDateString('fr-FR',{weekday:'long',day:'numeric',month:'long',year:'numeric'});
+  document.getElementById('rovExcerpt').textContent=a.excerpt;
+  const contentEl=document.getElementById('rovContent');
   if(a.category==='Interviews'){
     contentEl.innerHTML=a.content.split('\n').map(line=>{
       if(/^Q\s*:/i.test(line)) return `<p class="art-q">${esc(line)}</p>`;
